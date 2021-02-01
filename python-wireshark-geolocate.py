@@ -12,6 +12,8 @@ cmd = r"C:\Program Files\Wireshark\tshark.exe"
 # you can list all your interfaces by running "tshark.exe --list-interfaces"
 # then if for instance you want to use the 4th try:
 # cmd = r"C:\Program Files\Wireshark\tshark.exe -i 4"
+
+
 def get_own_ip():
     r = requests.get("https://api64.ipify.org/?format=json")
     data = json.loads(r.content)
@@ -61,13 +63,13 @@ for line in iter(process.stdout.readline, b""):
 
         try:
             country, sub, city = get_ip_location(src_ip)
-            print(src_ip + " " + country + ", " + sub + ", " + city)
+            print(">>> " + src_ip + " " + country + ", " + sub + ", " + city)
             last_ip = src_ip
         except:
             try:
                 real_ip = socket.gethostbyname(src_ip)
                 country, sub, city = get_ip_location(real_ip)
-                print(real_ip + " " + country + ", " + sub + ", " + city)
+                print(">>> " + real_ip + " " + country + ", " + sub + ", " + city)
                 last_ip = real_ip
             except:
                 print("Not found")
